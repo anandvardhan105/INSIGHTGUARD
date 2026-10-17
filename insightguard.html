@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InsightGuard AI | Smart Code Analyzer</title>
+  <link rel="stylesheet" href="insightguard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="insightguard.js" defer></script>
+</head>
+<body>
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">⬡</span>
+      <span>InsightGuard <b>AI</b></span>
+    </a>
+    <div class="header-status">
+      <span class="status-dot"></span> SYSTEM ONLINE
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">INTELLIGENT CODE SECURITY</span>
+        <h1>Build better code.<br><span>Stay one step ahead.</span></h1>
+        <p>Analyze your source code, identify potential issues, and explore actionable recommendations with InsightGuard AI.</p>
+        <a class="primary-button" href="#analyzer">Launch Code Analyzer ↗</a>
+      </div>
+
+      <div class="robot-stage">
+        <div class="robot-caption">YOUR AI SECURITY ASSISTANT</div>
+        <div class="robot-platform"></div>
+
+        <div class="robot">
+          <div class="robot-aura"></div>
+
+          <div class="robot-head">
+            <div class="head-top"></div>
+            <div class="head-side left-side"></div>
+            <div class="head-side right-side"></div>
+            <div class="forehead"><span>IG</span></div>
+            <div class="brow brow-left"></div>
+            <div class="brow brow-right"></div>
+            <div class="eye eye-left"><span></span></div>
+            <div class="eye eye-right"><span></span></div>
+            <div class="nose-plate"></div>
+            <div class="cheek cheek-left"></div>
+            <div class="cheek cheek-right"></div>
+            <div class="robot-mouth">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="chin"></div>
+          </div>
+
+          <div class="neck"></div>
+          <div class="robot-body">
+            <div class="shoulder shoulder-left"></div>
+            <div class="shoulder shoulder-right"></div>
+            <div class="chest">
+              <span class="chest-light"></span>
+              <span class="chest-label">INSIGHTGUARD</span>
+              <span class="chest-line"></span>
+            </div>
+            <div class="body-plate plate-left"></div>
+            <div class="body-plate plate-right"></div>
+          </div>
+        </div>
+
+        <div class="speech-bubble" id="robotGreeting">
+          <span class="bubble-dot"></span>
+          Hi, Dr.Bora what is today's quest??
+        </div>
+        <div class="robot-label">ULTRON-INSPIRED AI</div>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span class="stat-icon purple">⌘</span>
+        <p>Files Analyzed</p>
+        <h2 id="filesAnalyzed">0</h2>
+        <small>Files in this session</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon red">⚠</span>
+        <p>Issues Detected</p>
+        <h2 id="issuesDetected">0</h2>
+        <small>Potential code concerns</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon green">✓</span>
+        <p>Lines Scanned</p>
+        <h2 id="linesScanned">0</h2>
+        <small>Lines processed</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon blue">◈</span>
+        <p>Risk Score</p>
+        <h2 id="riskScore">0<span class="percent">/100</span></h2>
+        <small id="riskLabel">Awaiting analysis</small>
+      </article>
+    </section>
+
+    <section id="analyzer" class="workspace">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WORKSPACE</span>
+          <h2>Code Analysis Center</h2>
+          <p>Paste source code or upload supported code files to begin.</p>
+        </div>
+        <span class="live-badge"><span class="status-dot"></span> READY</span>
+      </div>
+
+      <div class="analyzer-grid">
+        <div class="panel editor-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="panel-kicker">SOURCE INPUT</span>
+              <h3>Code Editor</h3>
+            </div>
+
+            <select id="languageSelect" aria-label="Programming language">
+              <option value="auto">Auto detect</option>
+              <option value="python">Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="java">Java</option>
+              <option value="css">CSS</option>
+              <option value="html">HTML</option>
+            </select>
+          </div>
+
+          <div class="editor-toolbar">
+            <span class="file-tab">● <span id="fileLabel">untitled.py</span></span>
+            <span id="lineCount">1 line</span>
+          </div>
+
+          <textarea
+            id="codeInput"
+            spellcheck="false"
+            placeholder="# Paste your code here...
+# Or click Load Sample to try InsightGuard AI."
+          ></textarea>
+
+          <div class="editor-actions">
+            <label class="secondary-button upload-button">
+              ↑ Upload files
+              <input
+                id="fileInput"
+                type="file"
+                multiple
+                accept=".py,.js,.java,.css,.html,.txt"
+              >
+            </label>
+
+            <label class="secondary-button upload-button">
+              ▣ Upload folder
+              <input
+                id="folderInput"
+                type="file"
+                webkitdirectory
+                directory
+                multiple
+                accept=".py,.js,.java,.css,.html,.txt"
+              >
+            </label>
+
+            <button id="sampleButton" class="secondary-button" type="button">
+              Load Sample
+            </button>
+
+            <button id="clearButton" class="secondary-button" type="button">
+              Clear
+            </button>
+
+            <button id="analyzeButton" class="primary-button" type="button">
+              ⚡ Analyze Code
+            </button>
+          </div>
+
+          <p class="helper-text">
+            Supported: Python, JavaScript, Java, CSS, HTML, and TXT.
+            Select multiple files or upload a whole folder.
+          </p>
+
+          <div id="selectedFilesPanel" class="selected-files-panel" hidden>
+            <div class="selected-files-heading">
+              <strong>
+                Selected files
+                <span id="selectedFilesCount">0</span>
+              </strong>
+              <button
+                id="removeAllFilesButton"
+                class="text-button"
+                type="button"
+              >
+                Remove all
+              </button>
+            </div>
+
+            <div id="selectedFilesList" class="selected-files-list"></div>
+          </div>
+
+          <p id="analysisStatus" class="status-message" aria-live="polite">
+            Ready for your code.
+          </p>
+        </div>
+
+        <div class="panel results-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="panel-kicker">ANALYSIS OVERVIEW</span>
+              <h3>Security Insights</h3>
+            </div>
+            <span class="shield-icon">⬡</span>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="resultsChart" aria-label="Issue severity chart"></canvas>
+            <div class="chart-center">
+              <strong id="chartTotal">0</strong>
+              <span>FINDINGS</span>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span><i class="legend-dot critical"></i>High</span>
+            <span><i class="legend-dot medium"></i>Medium</span>
+            <span><i class="legend-dot low"></i>Low</span>
+            <span><i class="legend-dot info"></i>Info</span>
+          </div>
+
+          <div class="result-summary">
+            <div>
+              <span>Analysis status</span>
+              <strong id="summaryStatus">Not started</strong>
+            </div>
+            <div>
+              <span>Detected language</span>
+              <strong id="detectedLanguage">Unknown</strong>
+            </div>
+            <div>
+              <span>Last run</span>
+              <strong id="lastRun">—</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel findings-panel">
+      <div class="panel-heading findings-heading">
+        <div>
+          <span class="panel-kicker">DETAILED RESULTS</span>
+          <h2>Findings & Recommendations</h2>
+          <p>Review each finding and use the recommendations to improve your code.</p>
+        </div>
+
+        <button id="exportButton" class="secondary-button" type="button">
+          ↓ Export Report
+        </button>
+      </div>
+
+      <div class="filter-bar">
+        <input
+          id="searchFindings"
+          type="search"
+          placeholder="Search findings..."
+          aria-label="Search findings"
+        >
+
+        <select id="severityFilter" aria-label="Filter by severity">
+          <option value="all">All severities</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+          <option value="Info">Info</option>
+        </select>
+      </div>
+
+      <div id="findingsList" class="findings-list">
+        <div class="empty-state">
+          <div class="empty-icon">⌕</div>
+          <h3>No analysis results yet</h3>
+          <p>Load a sample or enter code, then click Analyze Code.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="robot-message panel">
+      <div class="mini-robot">◈</div>
+      <div>
+        <span class="panel-kicker">A MESSAGE FROM YOUR AI ASSISTANT</span>
+        <h3 id="assistantTitle">Ready when you are, Dr.Bora.</h3>
+        <p id="assistantMessage">
+          I can help identify common code patterns that may deserve a closer look.
+          Start an analysis to see your findings.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 InsightGuard AI · Built for smarter code reviews</p>
+      <p>Static rule-based checks · Not a substitute for a full security audit</p>
+    </footer>
+  </main>
+</body>
+</html>
